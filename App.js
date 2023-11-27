@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 
+// Funções de adicionar e excluir tarefa
+
 const App = () => {
   const [task, setTask] = useState('');
   const [tasks, setTasks] = useState([]);
 
-  const addTask = () => {
+  const addTexto = () => {
     if (task.trim() !== '') {
       setTasks([...tasks, task]);
       setTask('');
     }
   };
 
-  const removeTask = (index) => {
+  const removeTexto = (index) => {
     const newTasks = [...tasks];
     newTasks.splice(index, 1);
     setTasks(newTasks);
   };
+
+  // Visualização
 
   return (
     <View style={styles.container}>
@@ -27,7 +31,7 @@ const App = () => {
         value={task}
         onChangeText={(text) => setTask(text)}
       />
-      <TouchableOpacity style={styles.addButton} onPress={addTask}>
+      <TouchableOpacity style={styles.addButton} onPress={addTexto}>
         <Text style={styles.addButtonText}>Adicionar</Text>
       </TouchableOpacity>
       <FlatList
@@ -36,7 +40,7 @@ const App = () => {
         renderItem={({ item, index }) => (
           <View style={styles.taskItem}>
             <Text>{item}</Text>
-            <TouchableOpacity onPress={() => removeTask(index)}>
+            <TouchableOpacity onPress={() => removeTexto(index)}>
               <Text style={styles.deleteButton}>Excluir</Text>
             </TouchableOpacity>
           </View>
@@ -45,6 +49,8 @@ const App = () => {
     </View>
   );
 };
+
+// Estilização
 
 const styles = StyleSheet.create({
   container: {
