@@ -63,17 +63,17 @@ const App = () => {
   
   let currentId = 0;
 
-const addTexto = () => {
-  if (task.trim() !== '') {
-    const novaTarefa = { id: currentId++, descricao: task }; // Adaptar conforme a estrutura do seu objeto
-    Tarefas.create(novaTarefa)
-      .then((id) => {
-        setTasks([...tasks, { id, ...novaTarefa }]);
-        setTask('');
-      })
-      .catch((error) => console.error(error));
-  }
-};
+  const addTexto = () => {
+    if (task.trim() !== '') {
+      const novaTarefa = { descricao: task }; // Remove obj.id
+      Tarefas.create(novaTarefa)
+        .then((id) => {
+          setTasks([...tasks, { id, ...novaTarefa }]);
+          setTask('');
+        })
+        .catch((error) => console.error(error));
+    }
+  };
 
 
   const removeTexto = (id) => {
@@ -102,17 +102,18 @@ const addTexto = () => {
         <Text style={styles.addButtonText}>Adicionar</Text>
       </TouchableOpacity>
       <FlatList
-        data={tasks}
-        keyExtractor={(item) => item.id.toString()} // Correção aqui
-        renderItem={({ item }) => (
-          <View style={styles.taskItem}>
-            <Text>{item.descricao}</Text> {/* Correção aqui */}
-            <TouchableOpacity onPress={() => removeTexto(item.id)}>
-              <Text style={styles.deleteButton}>Excluir</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
+  data={tasks}
+  keyExtractor={(item) => item.id.toString()}
+  renderItem={({ item }) => (
+    <View style={styles.taskItem}>
+      <Text>{item.descricao}</Text>
+      <TouchableOpacity onPress={() => removeTexto(item.id)}>
+        <Text style={styles.deleteButton}>Excluir</Text>
+      </TouchableOpacity>
+    </View>
+  )}
+/>
+
     </View>
   );
 };

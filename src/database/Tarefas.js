@@ -43,8 +43,8 @@ db.transaction((tx) => {
   //<<<<<<<<<<<<<<<<<<<<<<<< USE ISSO APENAS DURANTE OS TESTES!!! >>>>>>>>>>>>>>>>>>>>>>>
 
   tx.executeSql(
-    "CREATE TABLE IF NOT EXISTS Tarefas (id INTEGER, descricao TEXT);"
-  );
+    "CREATE TABLE IF NOT EXISTS Tarefas (id INTEGER PRIMARY KEY AUTOINCREMENT, descricao TEXT);"
+  );  
 });
 
 /**
@@ -61,20 +61,22 @@ const create = (obj) => {
 
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
-      //comando SQL modificável
+      // Comando SQL modificável
       tx.executeSql(
-        "INSERT INTO Tarefas (id, descricao) values (?, ?);",
-        [obj.id, obj.descricao],
+        "INSERT INTO Tarefas (descricao) values (?);",
+        [obj.descricao],
         //-----------------------
         (_, { rowsAffected, insertId }) => {
           if (rowsAffected > 0) resolve(insertId);
-          else reject("Error inserting obj: " + JSON.stringify(obj)); // insert falhou
+          else reject("Erro ao inserir obj: " + JSON.stringify(obj)); // Falha na inserção
         },
-        (_, error) => reject(error) // erro interno em tx.executeSql
+        (_, error) => reject(error) // Erro interno em tx.executeSql
       );
     });
   });
 };
+
+
 
 /**
  * ATUALIZA UM REGISTRO JÁ EXISTENTE
