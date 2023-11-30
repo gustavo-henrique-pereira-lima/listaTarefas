@@ -9,48 +9,6 @@ const printTarefas = (tarefas) => {
   console.log(`id:${tarefas.id}, descricao:${tarefas.descricao}`)
 }
 
-/*
-export default function App() {
-
-  const [tarefas, setTarefas] = useState([]);
-
-  useEffect(() => {
-    // Exemplo de leitura de todas as tarefas ao carregar o componente
-    Tarefas.all()
-      .then((result) => {
-        setTarefas(result);
-        console.log(result);
-      })
-      .catch((error) => console.error(error));
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      <Text>Check Console</Text>
-      <FlatList
-        data={tarefas}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => printTarefa(item)}>
-            <Text>{item.descricao}</Text>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-*/
-
-
 
 const App = () => {
   const [task, setTask] = useState('');

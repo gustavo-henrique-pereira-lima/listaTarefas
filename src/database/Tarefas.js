@@ -1,34 +1,3 @@
-/* ******************* marco ****************************
-import {DatabaseConnection as db} from "./DatabaseConnection";
-query.then((e)=>{
-
-
-}).catch((e)=>{
-
-
-})
-
-function query(tx){
-  return new Promise((resolve,reject)=>{
-    try {
-      let instance = db.getConnetction()  
-      var x = instance.transaction(tx)
-      resolve(x)
-    } catch (error) {
-      reject(error)
-    }finally{
-      instance.closeAsync() 
-
-    }
-    
-  })
-
-  
-}
-
-***************marco *********************/
-
-
 
 import db from "./DatabaseConnection";
 
@@ -77,43 +46,6 @@ const create = (obj) => {
 };
 
 
-
-/**
- * ATUALIZA UM REGISTRO JÁ EXISTENTE
- * - Recebe o ID do registro e um OBJETO com valores atualizados;
- * - Retorna uma Promise:
- *  - O resultado da Promise é a quantidade de registros atualizados;
- *  - Pode retornar erro (reject) caso o ID não exista ou então caso ocorra erro no SQL.
- */
-
-/*
-const update = (id, obj) => {
-  return new Promise((resolve, reject) => {
-    db.transaction((tx) => {
-      //comando SQL modificável
-      tx.executeSql(
-        "UPDATE Tarefas SET descricao=? WHERE id=?;",
-        [obj.descricao, id],
-        //-----------------------
-        (_, { rowsAffected }) => {
-          if (rowsAffected > 0) resolve(rowsAffected);
-          else reject("Error updating obj: id=" + id); // nenhum registro alterado
-        },
-        (_, error) => reject(error) // erro interno em tx.executeSql
-      );
-    });
-  });
-};
-*/
-
-
-/**
- * BUSCA UM REGISTRO POR MEIO DO ID
- * - Recebe o ID do registro;
- * - Retorna uma Promise:
- *  - O resultado da Promise é o objeto (caso exista);
- *  - Pode retornar erro (reject) caso o ID não exista ou então caso ocorra erro no SQL.
- */
 const find = (id) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
@@ -207,7 +139,6 @@ const remove = (id) => {
 
 export default {
   create,
-  /*update,*/
   find,
   findByBrand,
   all,
