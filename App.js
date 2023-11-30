@@ -60,18 +60,17 @@ const App = () => {
         <Text style={styles.addButtonText}>Adicionar</Text>
       </TouchableOpacity>
       <FlatList
-  data={tasks}
-  keyExtractor={(item) => item.id.toString()}
-  renderItem={({ item }) => (
-    <View style={styles.taskItem}>
-      <Text>{item.descricao}</Text>
-      <TouchableOpacity onPress={() => removeTexto(item.id)}>
-        <Text style={styles.deleteButton}>Excluir</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-/>
-
+        data={tasks}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.taskItem}>
+            <Text>{item.descricao}</Text>
+            <TouchableOpacity onPress={() => removeTexto(item.id)}>
+              <Text style={styles.deleteButton}>Excluir</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      />
     </View>
   );
 };
