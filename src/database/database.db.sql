@@ -1,0 +1,6 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "Tarefas" (
+	"id"	INTEGER,
+	"descricao"	TEXT
+);
+COMMIT;

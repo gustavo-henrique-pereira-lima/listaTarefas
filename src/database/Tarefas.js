@@ -1,4 +1,37 @@
-import db from "./SQLiteDatabse";
+/* ******************* marco ****************************
+import {DatabaseConnection as db} from "./DatabaseConnection";
+query.then((e)=>{
+
+
+}).catch((e)=>{
+
+
+})
+
+function query(tx){
+  return new Promise((resolve,reject)=>{
+    try {
+      let instance = db.getConnetction()  
+      var x = instance.transaction(tx)
+      resolve(x)
+    } catch (error) {
+      reject(error)
+    }finally{
+      instance.closeAsync() 
+
+    }
+    
+  })
+
+  
+}
+
+***************marco *********************/
+
+
+
+import db from "./DatabaseConnection";
+
 
 /**
  * INICIALIZAÇÃO DA TABELA
@@ -10,7 +43,7 @@ db.transaction((tx) => {
   //<<<<<<<<<<<<<<<<<<<<<<<< USE ISSO APENAS DURANTE OS TESTES!!! >>>>>>>>>>>>>>>>>>>>>>>
 
   tx.executeSql(
-    "CREATE TABLE IF NOT EXISTS cars (id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, model TEXT, hp INT);"
+    "CREATE TABLE IF NOT EXISTS Tarefas (id INTEGER, descricao TEXT);"
   );
 });
 
@@ -22,12 +55,16 @@ db.transaction((tx) => {
  *  - Pode retornar erro (reject) caso exista erro no SQL ou nos parâmetros.
  */
 const create = (obj) => {
+  if (typeof obj.descricao !== "string") {
+    throw new Error("O valor da propriedade 'descricao' deve ser do tipo 'string'.");
+  }
+
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       //comando SQL modificável
       tx.executeSql(
-        "INSERT INTO cars (brand, model, hp) values (?, ?, ?);",
-        [obj.brand, obj.model, obj.hp],
+        "INSERT INTO Tarefas (id, descricao) values (?, ?);",
+        [obj.id, obj.descricao],
         //-----------------------
         (_, { rowsAffected, insertId }) => {
           if (rowsAffected > 0) resolve(insertId);
@@ -46,13 +83,15 @@ const create = (obj) => {
  *  - O resultado da Promise é a quantidade de registros atualizados;
  *  - Pode retornar erro (reject) caso o ID não exista ou então caso ocorra erro no SQL.
  */
+
+/*
 const update = (id, obj) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       //comando SQL modificável
       tx.executeSql(
-        "UPDATE cars SET brand=?, model=?, hp=? WHERE id=?;",
-        [obj.brand, obj.model, obj.hp, id],
+        "UPDATE Tarefas SET descricao=? WHERE id=?;",
+        [obj.descricao, id],
         //-----------------------
         (_, { rowsAffected }) => {
           if (rowsAffected > 0) resolve(rowsAffected);
@@ -63,6 +102,8 @@ const update = (id, obj) => {
     });
   });
 };
+*/
+
 
 /**
  * BUSCA UM REGISTRO POR MEIO DO ID
@@ -76,7 +117,7 @@ const find = (id) => {
     db.transaction((tx) => {
       //comando SQL modificável
       tx.executeSql(
-        "SELECT * FROM cars WHERE id=?;",
+        "SELECT * FROM Tarefas WHERE id=?;",
         [id],
         //-----------------------
         (_, { rows }) => {
@@ -102,7 +143,7 @@ const findByBrand = (brand) => {
     db.transaction((tx) => {
       //comando SQL modificável
       tx.executeSql(
-        "SELECT * FROM cars WHERE brand LIKE ?;",
+        "SELECT * FROM Tarefas WHERE descricao LIKE ?;",
         [brand],
         //-----------------------
         (_, { rows }) => {
@@ -128,7 +169,7 @@ const all = () => {
     db.transaction((tx) => {
       //comando SQL modificável
       tx.executeSql(
-        "SELECT * FROM cars;",
+        "SELECT * FROM Tarefas;",
         [],
         //-----------------------
         (_, { rows }) => resolve(rows._array),
@@ -150,7 +191,7 @@ const remove = (id) => {
     db.transaction((tx) => {
       //comando SQL modificável
       tx.executeSql(
-        "DELETE FROM cars WHERE id=?;",
+        "DELETE FROM Tarefas WHERE id=?;",
         [id],
         //-----------------------
         (_, { rowsAffected }) => {
@@ -164,7 +205,7 @@ const remove = (id) => {
 
 export default {
   create,
-  update,
+  /*update,*/
   find,
   findByBrand,
   all,

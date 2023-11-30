@@ -1,6 +1,12 @@
 import * as SQLite from 'expo-sqlite';
 
-export const DatabaseConnection = {
-    getConnetction: () => SQLite.openDatabase("database.db")
+const db = SQLite.openDatabase("./database.db")
+
+export default db
+
+/*
+export  let DatabaseConnection = {
+    getConnetction: () => SQLite.openDatabase("./database.db")
 
 };
+*/
