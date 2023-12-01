@@ -6,24 +6,26 @@ Bem-vindo ao Aplicativo de Lista de Tarefas! Este aplicativo foi desenvolvido pa
 
 Para configurar e executar o aplicativo em seu ambiente local, siga os passos abaixo:
 
-1. **Clonagem do Repositório:**
+1. Clonagem do Repositório:
    - Clone este repositório em sua máquina local utilizando o comando: `git clone https://seu-repositorio.git`
 
-2. **Atualização de Dependências:**
+2. Atualização de Dependências:
    - Navegue até a pasta raiz do projeto e, no terminal, execute o comando: `npm install` para atualizar as dependências.
 
-3. **Iniciar o Serviço:**
+3. Iniciar o Serviço:
    - Execute o comando: `npx expo start` para iniciar o serviço do aplicativo.
 
 # Estrutura do Projeto
 
 O sistema é composto por três arquivos principais:
 
-1. **app.js:**
+1. app.js:
    - Este arquivo contém a interface do usuário do aplicativo. Aqui, você encontrará funções que tornam possível a adição de tarefas, proporcionando uma experiência fluida ao usuário.
 
-2. **src/database/Tarefas.js:**
+2. src/database/Tarefas.js:
    - A classe Tarefas neste arquivo é responsável por armazenar as tarefas na base de dados. Ela contém métodos para instanciar objetos de tarefas e gerenciar o armazenamento.
 
-3. **src/database/ConnectionDatabase.js:**
+3. src/database/ConnectionDatabase.js:
    - O arquivo ConnectionDatabase.js é responsável por abrir a conexão com o banco de dados, garantindo uma interação eficiente e segura entre o aplicativo e os dados armazenados.
+
+Alunos: Diosne Marlon Furtado dos Santos - 04109634, Gustavo Henrique Pereira Lima - 04098527, Kauan Leandro Gonçalves de Araújo Moreira - 04113076 e Paulo Sérgio Barros Teixeira - 04147128
